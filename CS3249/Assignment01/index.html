@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kyle's Kitten Kiosk</title>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link async href='https://fonts.googleapis.com/css?family=Karla:400,700|Lato:400,900' rel='stylesheet' type='text/css'>
+    
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/fancybox/dist/js/jquery.fancybox.js"></script>
+    <script src="js/main.js"></script>
+
+    <link href="node_modules/fancybox/dist/css/jquery.fancybox.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="wrapper" class="col-sm-12 col-md-10 col-md-offset-1 nopadding">
+        <header>
+            <a href="#">
+                <img class="logo" src="img/kkk.png" alt="KKK logo">
+            </a>
+            <img onclick="toggleMenu()" xlink:href="img/menu-icon.svg" src="img/menu-icon.png" alt="Menu Icon" class="menuIcon"/>
+        </header>
+        <div class="col-sm-12 col-md-2 nopadding">
+            <nav id="main-navigation" class="closed">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Kitten Gallery</a></li>
+                    <li><a href="#">Kitten Farm</a></li>
+                    <li><a href="#">Kitten Care</a></li>
+                    <li><a href="#">Our Sponsors</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-sm-12 col-md-7 nopadding">
+            <article>
+                <img src="img/8.jpg">
+                <h1>RENT A KITTEN WITH US.</h1>
+                <section>
+                    <h2>Who are we?</h2>
+                    <p>KKK is the leading global kitten rental and kitten hire agency and extends the first class rental service that customers have come to expect to the internet, where you can rent a siamese, american shorthair, bengal, ragdoll, singapura or whatever kind of feline you desire from the comfort of your own home. Worldwide, more than 4,500 KKK stations offer additional services, allowing customers to rent more exotic kittens. Enjoy the new KKK website, and keep up to date on kitten rental, purchase, and leasing! </p>
+                </section>
+                <section>
+                    <h2>Our Promise</h2>
+                    <p>Here is our promise to you. ALL of our kittens are</p>
+                    <div class="has-inline-elements">
+                        <div class="promise-container">
+                            <div class="promise">Bacteria-free</div>
+                        </div>
+                        <div class="promise-container">
+                            <div class="promise">Highly Cuddly</div>
+                        </div>
+                        <div class="promise-container">
+                            <div class="promise">Absolutely Adorable</div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Our crowd favourites</h2>
+                    <P>Click the kitty thumbnail to learn more about the kitty.</P>
+                    <div class="has-inline-elements">
+                        <a class="fancybox" rel="group" href="img/1.jpg" title="Meet Toffee! He is a cool little kitten, about 2+ months old. He was rescued by an elderly stray feeder in an industrial area. He is an active but very gentle boy. Being a kitten, he loves to run around and play. He has a good temperament and open to anyone."><img src="img/1.jpg" alt="" /></a>
+                        <a class="fancybox" rel="group" href="img/2.jpg" title="Latte is a stunning little cat. She is about a year old. Tame, gentle and bubbly girl who truly deserves the best in life. With her good temperament, she is a good choice for first time cat renter."><img src="img/2.jpg" alt="" /></a>
+                        <a class="fancybox" rel="group" href="img/3.jpg" title="The girl who heals: Primrose. As her name suggests, Primrose is a sweet lady who is smart and would heal her loved ones. Let Primrose rejuvenate your life by offering a place for her."><img src="img/3.jpg" alt="" /></a>
+                        <a class="fancybox" rel="group" href="img/4.jpg" title="Clover has huge telling apple green eyes that reminds us of sparkling jewels. Clover can be a little defensive due to her previous experiences, but with time, she is gradually warming up to people she is comfortable with. Often, she amuses us with her funny antics, with enough love and patience, we are certain this one beauty with brains who will bring lots of joy to the household."><img src="img/4.jpg" alt="" /></a>
+                        <a class="fancybox" rel="group" href="img/6.jpg" title="Mustafa might be 10 years old, but he is still a young kitten at heart. Mustafa is our most gentle kitten, insisting on only eating broccoli. The pride and joy of KKK, Mustafa might cost $1000 an hour, but he is well worth every single cent."><img src="img/6.jpg" alt="" /></a>
+                        <a class="fancybox" rel="group" href="img/7.jpg" title="The boy who radiates life: Finnick. Like his movie counterpart, Finnick has an easygoing nature and has a 'seductive purr'."><img src="img/7.jpg" alt="" /></a>
+                    </div>
+                </section>
+                <section>
+                    <h2>Where to find us</h2>
+                    <div style="overflow:hidden;height:500px;width:100%;">
+                        <div id="gmap_canvas" style="height:500px;width:100%;"></div>
+                        <a class="google-map-code" href="http://www.pureblack.de" id="get-map-data">pure black gmbh</a>
+                    </div>
+                </section>
+            </article>
+        </div>
+        <div class="col-sm-12 col-md-3 nopadding">
+            <aside>
+                <div class="rotate-img"><img src="img/9.png"></div>
+                <h1>Fun Kitten Facts!</h1>
+                <P>The Young of Domesticated Cats Are “Kittens”, Not “Cubs”. Of course you knew that!</P>
+                <P>There are usually 2-5 kittens in a litter, and they are born at 30-45 minute intervals. Some are born head first, much like human babies, but others come out feet first.</P>
+                <P>Newborn Kittens Are Completely Helpless. Kittens are born with tightly sealed eyes and ears, and for several weeks they spend their time sleeping and nursing. At this point, young kittens can’t even defecate or urinate without being stimulated by their mother! </P>
+                <P>Kittens Socialize in Order to Learn. Kittens learn through play, so all of the climbing, scampering, biting, stalking, meowing and so on emulates actions they will need to know as older cats.</P>
+            </aside>
+        </div>
+        <footer>
+            <p>&copy; Kyle's Kitten Kiosk</p>
+        </footer>
+    </div>
+</body>
+
+</html>
