@@ -1,0 +1,122 @@
+<html>
+	<head>
+	<title>CS3240 - Assignment 01</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald:700' rel='stylesheet' type='text/css'>
+			
+		<link href="../../node_modules/normalize.css/normalize.css" rel="stylesheet"/>
+		<link href="style.css" rel="stylesheet">
+
+		<!-- Using local resources for development -->
+		<link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+		<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- If you want to use CDNs, just comment out the section above and uncomment this one -->
+		<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/> -->
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+
+		<script src="js/main.js"></script>
+	</head>
+	<body>
+
+		<div class="page-wrap">
+			<div class="header">
+				<div id="menuIcon" class="hidden-sm hidden-md hidden-lg"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+				<ul id="mainMenu" class="closed">
+					<li class="socialMedia"><a href="http://facebook.com/rickard.bergeling" target="_blank"><img src="img/icons/facebook.png"/></a></li>
+					<li class="socialMedia"><a href="https://www.linkedin.com/in/rickardbergeling" target="_blank"><img src="img/icons/linkedin.png"/></a></li>
+					<li class="menuItem"><a>About Me</a></li>
+					<li class="menuItem"><a>Portfolio</a></li>
+					<li class="menuItem"><a>Contact</a></li>
+				</ul>
+				<div id="logo" class="hidden-xs">
+					<img src="img/logo.png"/>
+				</div>
+			</div>
+			<div class="content">
+				<div id="about" class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<div id="profilePicture" class="hidden-sm hidden-md hidden-lg">
+						<img src="img/rickard.jpg"/>
+					</div>
+					<h1>About Me</h1>
+					<hr/>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+				</div>
+
+				<div id="portfolio" class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<h1>Portfolio</h1>
+					<hr/>
+
+					<a href="http://branschdagen.bergeling.com" target="_blank"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+						<img src="img/logos/branschdagen.png"/>
+						<h2>Branschdagen 2015</h2>
+						<div class="description">Website, Logotype and more.</div>
+					</div></a>
+
+					<a href="http://salahhaghgo.se" target="_blank"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+						<img src="img/logos/salah.png"/>
+						<h2>Salah Haghgo</h2>
+						<div class="description">Website and Logotype</div>
+					</div></a>
+
+					<a href="http://lhedevelopment.se" target="_blank"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4"> 
+						<img src="img/logos/LHE.png"/>
+						<h2>LHE Development</h2>
+						<div class="description">Website</div>
+					</div></a>
+
+					<a href="http://neucon.se" target="_blank"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+						<img src="img/logos/neucon.png"/>
+						<h2>Neucon</h2>
+						<div class="description">Website and Logotype</div>
+					</div></a>
+
+					<a href="http://jobbaextra.bergeling.com/" target="_blank"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+						<img src="img/logos/jobbaextra.jpg"/>
+						<h2>JobbaExtra</h2>
+						<div class="description">School Project, Website</div>
+					</div></a>
+
+					<a href="http://xml.csc.kth.se/~rbergel/DM2517/Projekt/Latest" target="_blank"><div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+						<img src="img/logos/guides.png"/>
+						<h2>XML Guides</h2>
+						<div class="description">School Project, Website</div>
+					</div></a>
+					
+				</div>
+
+				<div id="contact" class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+					<h1>Contact</h1>
+					<hr/>
+					<!-- <p>Please fill out the form and I will get in touch with you as soon as I get the chance.</p> -->
+					<form role="form">
+						<div class="row" id="inputFields">
+							<div class="col-xs-12 col-md-6">
+				        		<input type="email" class="form-control" id="inputName" placeholder="Name">
+				        	</div>
+				        	<div class="col-xs-12 col-md-6">
+				        		<input type="email" class="form-control" id="inputEmail" placeholder="E-Mail">
+					        </div>
+					        <div class="col-xs-12 col-md-12">
+				                <textarea class="form-control" rows="4" id="inputMessage" placeholder="Message..."></textarea>
+					        </div>
+					    </div>
+					    <div id="feedbackMessage"></div>
+					    <button class="btn btn-primary" type="button" id="messageBtn"><span class="glyphicon glyphicon-send"></span> Send message!</button>
+					</form>
+				</div>
+
+				<div class="footer">
+					 &copy; Rickard Bergeling 2016
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
