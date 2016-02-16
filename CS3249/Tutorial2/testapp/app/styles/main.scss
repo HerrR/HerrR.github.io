@@ -1,0 +1,136 @@
+$icon-font-path: '../fonts/';
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+$awesomeWhite: #F0F0F0;
+$awesomeBlack: #444;
+$awesomeFonts: 'Helvetica Neue', 'Open Sans', Sans-Serif;
+
+@mixin awesomeShadow($opacity, $direction){
+  @if $direction == "up" {
+    -webkit-box-shadow: 0px -5px 20px -5px rgba(0,0,0,$opacity);
+    -moz-box-shadow: 0px -5px 20px -5px rgba(0,0,0,$opacity);
+    box-shadow: 0px -5px 20px -5px rgba(0,0,0,$opacity);
+  } @else {
+    -webkit-box-shadow: 0px 5px 20px -5px rgba(0,0,0,$opacity);
+    -moz-box-shadow: 0px 5px 20px -5px rgba(0,0,0,$opacity);
+    box-shadow: 0px 5px 20px -5px rgba(0,0,0,$opacity);
+  }
+}
+
+@mixin awesomeFilter($filter){
+  -webkit-filter: $filter;
+  -moz-filter: $filter;
+  -o-filter: $filter;
+  -ms-filter: $filter;
+  filter: $filter;
+}
+
+@mixin awesomeTransition($values){
+  -webkit-transition: $values;
+  -moz-transition: $values;
+  -o-transition: $values;
+  -ms-transition: $values;
+  transition: $values;
+}
+
+html, body {
+  width:100%;
+}
+
+body {
+  font-family: $awesomeFonts;
+}
+
+.header {
+  background-color: $awesomeBlack;
+  color: $awesomeWhite;
+  width: 100%;
+  text-align: center;
+  padding:20px;
+  @include awesomeShadow(0.5, "down");
+  .headerText {
+    @extend h1;
+    font-weight:bold;
+  }
+}
+
+.footer {
+  @extend .header;
+  @include awesomeShadow(0.5, "up")
+}
+
+.container {
+  margin:0;
+  padding:0;
+  width:100%;
+}
+
+.content {
+  padding:20px;
+  width:100%;
+  color:$awesomeBlack;
+
+  p {
+    line-height:1.8;
+  }
+}
+
+.outerDiv {
+  cursor:pointer;
+  width:100%;
+  font-size:0px;
+  margin:20px 0px;
+
+  .innerDiv {
+    font-size:16px;
+    color:white;
+    width:0.5*100%;
+    display:inline-block;
+    text-align: center;
+    position:relative;
+
+    img {
+      width:100%;
+      overflow: hidden;
+    }
+
+    &:hover{
+      img {
+        @include awesomeFilter(blur(1px) grayscale(50%) brightness(50%));
+      }
+    }
+
+    columnText {
+      font-weight:bold;
+      width:100%;
+      position:absolute;
+      left:0;
+      bottom:10px;
+      @include awesomeTransition(font-size 0.5s);
+    }
+
+    &:hover{
+      columnText{
+        font-size:2em;
+        color: $awesomeWhite;
+      }
+    }
+  }
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .content {
+    padding:20px 10%;
+  }
+
+  .outerDiv .innerDiv {
+    width:0.25*100%;
+    columnText {
+      font-size:1.5em;
+    }
+  }
+}
