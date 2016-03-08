@@ -1,0 +1,40 @@
+﻿#navigation{
+	width:140px
+}
+
+#navigation table{
+	width:100%
+}
+
+#navigation input{
+	width:100%
+}
+
+#canvas {
+	border: 1px solid #A9A9A9;
+	cursor:pointer;
+}
+
+#whoseTurn {
+	color:white;
+	text-align: center;
+	padding:20px 5px;
+	margin-bottom:20px;
+	transition:background-color 0.7s;
+	webkit-transition:background-color 0.7s;
+	moz-transition:background-color 0.7s;
+}
+
+#navigation table tbody tr:first-child{
+	/*height:120px;*/
+}
+.turn-indicator-red {
+	background-color:#960201;
+}
+
+.turn-indicator-black {
+	background-color:black;
+}
+/*#content{
+	background-color:gray;
+}*/

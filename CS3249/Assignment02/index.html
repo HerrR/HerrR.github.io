@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <!-- 
+		Assignment02 for CS3249 User Interface Development
+		        Contributors: Rickard Bergeling
+  -->
+
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>Checkerboard</title>
+    <!-- Load style sheets -->
+    <link rel="stylesheet" type="text/css" href="mainLayout.css" />
+    <!-- Load any supplemental Javascript libraries here -->
+    <script type="text/javascript" src="external_js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="checker.js"></script>
+    <script type="text/javascript" src="boardEvent.js"></script>
+    <script type="text/javascript" src="board.js"></script>
+    <script type="text/javascript" src="rules.js"></script>
+    <script type="text/javascript">
+      //This script extracts parameters from the URL
+      //from jquery-howto.blogspot.com
+
+      $.extend({
+        getUrlVars: function() {
+          var vars = [],
+            hash;
+          var hashes = window.location.href.slice(
+            window.location.href.indexOf('?') + 1).split('&');
+          for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+          }
+          return vars;
+        },
+        getUrlVar: function(name) {
+          return $.getUrlVars()[name];
+        }
+      });
+
+
+      var DEFAULT_BOARD_SIZE = 8;
+
+      //data model
+      var board;
+      var rules;
+      var lastMove;
+      var whoseTurn = "black";
+      var pickedUp = false;
+      var dragInfo = {};
+
+      var directionOf = function(color) {
+        if (color == "black") {
+          return -1;
+        }
+        return 1;
+      }
+
+      // Fill in this function to toggle the display for whose turn
+      // The color parameter should be either "black" or "red"
+      var toggleTurn = function(color) {
+        if (whoseTurn == "black") {
+          whoseTurn = "red";
+        } else {
+          whoseTurn = "black";
+        }
+        showWhoseTurn();
+      }
+
+      var showWhoseTurn = function() {
+        var turnStatusContainer = document.getElementById('whoseTurn');
+        if(board.activeVictoryScreen){
+        	turnStatusContainer.innerHTML = board.activeVictoryScreen.toUpperCase() + " WINS!";
+        	turnStatusContainer.className = "turn-indicator-"+board.activeVictoryScreen;
+        } else {
+        	turnStatusContainer.innerHTML = whoseTurn.toUpperCase() + " TURN";
+        	turnStatusContainer.className = "turn-indicator-" + whoseTurn;	
+        }
+      }
+
+      var pickUp = function(e) {
+        var rowCol = board.getRowColFromCoords(e.layerX, e.layerY);
+        row = rowCol[0];
+        col = rowCol[1];
+        var pickedUpChecker = board.getCheckerAt(row, col);
+        if (pickedUpChecker && (pickedUpChecker.color == whoseTurn)) {
+          pickedUp = true;
+          dragInfo = {};
+          dragInfo["originX"] = e.layerX;
+          dragInfo["originY"] = e.layerY;
+          dragInfo["currentX"] = e.layerX;
+          dragInfo["currentY"] = e.layerY;
+          dragInfo["checker"] = pickedUpChecker;
+        }
+      }
+
+      var release = function(e) {
+        if (pickedUp) {
+          var rowCol = board.getRowColFromCoords(e.layerX, e.layerY);
+          var validMoves = rules.validMovesFor(dragInfo.checker, directionOf(whoseTurn));
+          for (move in validMoves) {
+            if ((validMoves[move].to_row == rowCol[0]) && (validMoves[move].to_col == rowCol[1])) {
+            	if(validMoves[move].remove.length > 0){
+            		for(victim in validMoves[move].remove){
+            			board.remove(validMoves[move].remove[victim]);
+            		}
+            	}
+              board.moveTo(dragInfo.checker, rowCol[0], rowCol[1]);
+            }
+          }
+          board.draw(lastMove);
+          pickedUp = false;
+          dragInfo = null;
+        }
+      }
+
+      var moveAround = function(e) {
+        if (pickedUp) {
+          dragInfo["currentX"] = e.layerX;
+          dragInfo["currentY"] = e.layerY;
+          board.draw(lastMove, dragInfo);
+        }
+      }
+
+      var userExit = function(e) {
+        pickedUp = false;
+        dragInfo = undefined;
+        board.draw(lastMove);
+      }
+
+      var checkIfVictory = function(){
+        // Check if all the pieces of either side has been removed
+        board.checkIfVictory();
+
+        // Check if there are any valid moves for the current player
+        var allCheckers = board.getAllCheckers();
+        var numValidMovesForActiveUser = 0;
+        
+        for(c in allCheckers){
+          if(allCheckers[c].color == whoseTurn){
+            numValidMovesForActiveUser += rules.validMovesFor(allCheckers[c], directionOf(whoseTurn)).length;
+          }
+        }
+
+        if(numValidMovesForActiveUser == 0){
+          if(whoseTurn == "black"){
+            board.activateVictoryScreen("red");
+          } else {
+            board.activateVictoryScreen("black");
+          }
+        }
+        board.draw(lastMove);
+        showWhoseTurn();
+      }
+
+
+
+      // This allows the Javascript code inside this block to only run when the page
+      // has finished loading in the browser.
+      $(document).ready(function() {
+
+        if ($.getUrlVar('size') && $.getUrlVar('size') >= 6) {
+          board = new Board($.getUrlVar('size'));
+        } else {
+          board = new Board(DEFAULT_BOARD_SIZE);
+        }
+
+        rules = new Rules(board);
+
+
+        board.addEventListener('add', function(e) {
+          var eventDetails = e.details;
+        }, true);
+
+        board.addEventListener('move', function(e) {
+
+        	// For each move we need to check how many moves the opponent can make, a player who is out of moves have lost. 
+          lastMove = e;
+          board.draw(lastMove);
+          toggleTurn(whoseTurn);
+          checkIfVictory();
+          showWhoseTurn();
+        }, true);
+
+        board.addEventListener('remove', function(e) {
+          checkIfVictory();
+          board.draw(lastMove);
+        }, true);
+
+        // board.addEventListener('promote', function(e) {
+        // }, true);
+
+
+        $("#btnNewGame").click(function(evt) {
+          board.prepareNewGame();
+          board.disableVictoryScreen();
+          whoseTurn = "black";
+          lastMove = null;
+          board.draw();
+          showWhoseTurn();
+        });
+
+        $("#btnAutoMove").click(function(evt) {
+          var playerColor = whoseTurn;
+          var playerDirection = directionOf(playerColor);
+          var result = rules.makeRandomMove(playerColor, playerDirection);
+
+          if (result == null) {
+            checkIfVictory();
+						if(board.activeVictoryScreen){
+							showWhoseTurn();
+						}
+          }
+        });
+
+        document.getElementById("canvas").addEventListener("mousedown", pickUp);
+        document.getElementById("canvas").addEventListener("mouseup", release);
+        document.getElementById("canvas").addEventListener("mousemove", moveAround);
+        document.getElementById("canvas").addEventListener("mouseleave", userExit);
+        board.prepareNewGame();
+        board.draw();
+        showWhoseTurn();
+      });
+    </script>
+  </head>
+
+  <body>
+    <table id="mainTable">
+      <tr>
+        <td id="navigation">
+          <table>
+            <tr>
+							<td>
+                <div id="whoseTurn"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input id="btnNewGame" type="button" name="new" value="New Game" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input id="btnAutoMove" type="button" name="new" value="Auto Move" />
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td id="content">
+          <canvas id="canvas" width="400" height="400"></canvas>
+          <!-- Your code here -->
+        </td>
+      </tr>
+    </table>
+  </body>
+
+</html>
