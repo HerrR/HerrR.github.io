@@ -27,6 +27,7 @@ var MenuExample = React.createClass({
 
 					var style = '';
 					console.log(m);
+					console.log(self);
 
 					if (self.state.focused == index) {
 						style = 'focused';
@@ -34,14 +35,16 @@ var MenuExample = React.createClass({
 
 					// Notice the use of the bind() method. It makes the
 					// index available to the clicked function:
-					return <a href={m[1]}><li className = { style }
+					return <a href={'#'+m[1]}><li className = { style }
 					onClick = { self.clicked.bind(self, index) } > { m[0] } < /li></a>;
 
 				})
 			}
 
 			< /ul>
-			< p > Selected: { this.props.items[this.state.focused] } < /p> < /div>
+			< p > Selected: { this.props.items[this.state.focused][0] } < /p> < /div>
+			
+
 
 		);
 
@@ -49,9 +52,10 @@ var MenuExample = React.createClass({
 });
 
 // Render the menu component on the page, and pass an array with menu options
+var menuItems = [['Home', '/home'], ['Services', '/services'], ['About','/about'], ['Contact us','/contact']];
 
 ReactDOM.render( 
-	<MenuExample items = {[['Home', '/home'], ['Services', '/services'], ['About','/about'], ['Contact us','/contact']]}/>,
+	<MenuExample items = { menuItems }/>,
 	// items = {['Home', 'Services', 'About', 'Contact us']},
 	document.getElementById('container')
 );
